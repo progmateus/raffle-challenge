@@ -1,7 +1,7 @@
 import { hash, compare } from 'bcryptjs'
-import { IBcryptHasher } from './IBCryptHasher'
+import { IBcryptHasherProvider } from './IBcryptHasherProvider'
 
-class BcryptHasher implements IBcryptHasher {
+class BcryptHasherProvider implements IBcryptHasherProvider {
   private HASH_SALT_LENGTH = 8
 
   hash(plain: string): Promise<string> {
@@ -13,4 +13,4 @@ class BcryptHasher implements IBcryptHasher {
   }
 }
 
-export { BcryptHasher }
+export { BcryptHasherProvider }
