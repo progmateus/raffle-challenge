@@ -9,6 +9,8 @@ import { IOrdersRepository } from "../../domain/contexts/orders/repositories/con
 import { IPaymentsRepository } from "../../domain/contexts/payments/repositories/contracts/IPaymentsRepository";
 import { OrdersRepository } from "../../data/repositories/OrdersRepository";
 import { PaymentsRepository } from "../../data/repositories/PaymentsRepository";
+import { IRedeemsRepository } from "../../domain/contexts/redeems/repositories/contracts/IRedeemsRepository";
+import { RedeemsRepository } from "../../data/repositories/RedeemsRepository";
 
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
@@ -35,4 +37,9 @@ container.registerSingleton<IOrdersRepository>(
 container.registerSingleton<IPaymentsRepository>(
   "PaymentsRepository",
   PaymentsRepository
+);
+
+container.registerSingleton<IRedeemsRepository>(
+  "RedeemsRepository",
+  RedeemsRepository
 );
