@@ -1,10 +1,6 @@
-import { ICreateUserDTO } from "../../../../domain/contexts/accounts/dtos/ICreateUserDTO";
-import { User } from "../../../../domain/contexts/accounts/entities/User";
-import { IUsersRepository } from "../../../../domain/contexts/accounts/repositories/contracts/IUsersRepository";
-import { ICreateRedeemDTO } from "../../../../domain/contexts/reedems/dtos/ICreateReedemDTO";
-import { IGenerateReedemDTO } from "../../../../domain/contexts/reedems/dtos/IGenerateReedemDTO";
-import { Redeem } from "../../../../domain/contexts/reedems/entites/Redeem";
-import { IRedeemsRepository } from "../../../../domain/contexts/reedems/repositories/contracts/IRedeemsRepository";
+import { IGenerateRedeemDTO } from "../../../../domain/contexts/redeems/dtos/IGenerateRedeemDTO";
+import { Redeem } from "../../../../domain/contexts/redeems/entites/Redeem";
+import { IRedeemsRepository } from "../../../../domain/contexts/redeems/repositories/contracts/IRedeemsRepository";
 
 class RedeemsrepositoryInMemory implements IRedeemsRepository {
   redeems: Redeem[] = [];
@@ -12,7 +8,7 @@ class RedeemsrepositoryInMemory implements IRedeemsRepository {
   async findByNumbers(numbers: string[]): Promise<Redeem[]> {
     return this.redeems.filter((r) => numbers.includes(r.number))
   }
-  async bulkCreate(data: IGenerateReedemDTO[]): Promise<void> {
+  async bulkCreate(data: IGenerateRedeemDTO[]): Promise<void> {
     data.map((r) => {
       const redeem = {
         number: r.number,

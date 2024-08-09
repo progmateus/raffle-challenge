@@ -1,4 +1,4 @@
-import { AutoIncrement, BelongsTo, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 
 @Table
 class Payment extends Model {
@@ -49,6 +49,10 @@ class Payment extends Model {
 
   @Column
   country: string;
+
+  @ForeignKey(() => Payment)
+  @Column
+  paymentId: number;
 
   @BelongsTo(() => Payment)
   payment: Payment;

@@ -1,4 +1,5 @@
 interface ICreateCartDTO {
-  price: number
+  userId: number;
+  price: number;
 }
 export { ICreateCartDTO }

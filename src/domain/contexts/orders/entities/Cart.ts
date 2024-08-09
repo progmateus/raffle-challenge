@@ -1,5 +1,5 @@
 import { AutoIncrement, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
-import { Redeem } from "../../reedems/entites/Redeem";
+import { Redeem } from "../../redeems/entites/Redeem";
 
 @Table
 class Cart extends Model {

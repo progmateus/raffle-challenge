@@ -17,8 +17,12 @@ class Order extends Model {
   @BelongsTo(() => Payment)
   payment: Payment;
 
-  @BelongsTo(() => Cart)
+  @ForeignKey(() => Cart)
+  @Column
   cartId: number;
+
+  @BelongsTo(() => Cart)
+  cart: number;
 
   @Column
   price: string;

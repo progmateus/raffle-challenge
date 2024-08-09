@@ -1,15 +1,15 @@
 
 import { container, inject, injectable } from "tsyringe";
-import { IRedeemsRepository } from "../repositories/contracts/IRedeemsRepository";
-import { ICreateRedeemDTO } from "../dtos/ICreateReedemDTO";
-import { INumbersProvider } from "../providers/random/INumbersProvider";
-import { Redeem } from "../entites/Redeem";
-import { ICartsRepository } from "../../orders/repositories/contracts/ICartsRepository";
-import { IOrdersRepository } from "../../orders/repositories/contracts/IOrdersRepository";
+import { ICartsRepository } from "../repositories/contracts/ICartsRepository";
+import { IOrdersRepository } from "../repositories/contracts/IOrdersRepository";
 import { CreatePaymentUsecase } from "../../payments/useCases/createPayment/CreatePaymentUsecase";
+import { ICreateOrderDTO } from "../dtos/ICreateOrderDTO";
+import { IRedeemsRepository } from "../../redeems/repositories/contracts/IRedeemsRepository";
+import { INumbersProvider } from "../../redeems/providers/random/INumbersProvider";
+import { Redeem } from "../../redeems/entites/Redeem";
 
 @injectable()
-class CreateRedeemUseCase {
+class CreateOrderUseCase {
 
   constructor(
     @inject("RedeemsRepository")
@@ -22,7 +22,7 @@ class CreateRedeemUseCase {
     private ordersRepository: IOrdersRepository,
   ) { }
 
-  async execute({ userId, qtdNumbers, payment }: ICreateRedeemDTO): Promise<Redeem[]> {
+  async execute({ payment, qtdNumbers, userId }: Omit<ICreateOrderDTO, "cartId" | "price">): Promise<Redeem[]> {
     let generatedNumbers = this.numbersProvider.generateRandomNumbers(qtdNumbers);
 
     const numbersAlreadyExistents = await this.redeemsRepository.findByNumbers(generatedNumbers)
@@ -41,13 +41,15 @@ class CreateRedeemUseCase {
       }
       generatedNumbers = nonExistentNumbers
     }
+    const price = qtdNumbers * 0.25;
 
-    const { id: cartId } = await this.cartsRepository.create();
+    const { id: cartId } = await this.cartsRepository.create(userId, price);
 
     const order = await this.ordersRepository.create({
       qtdNumbers,
       cartId,
-      price: qtdNumbers * 0.25
+      userId,
+      price
     })
 
     const { credit_card, payment_method } = payment
@@ -68,4 +70,4 @@ class CreateRedeemUseCase {
     return this.redeemsRepository.findByNumbers(generatedNumbers)
   }
 }
-export { CreateRedeemUseCase }
+export { CreateOrderUseCase }

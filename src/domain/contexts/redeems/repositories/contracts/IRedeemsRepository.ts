@@ -1,9 +1,9 @@
-import { IGenerateReedemDTO } from "../../dtos/IGenerateReedemDTO";
+import { IGenerateRedeemDTO } from "../../dtos/IGenerateRedeemDTO";
 import { Redeem } from "../../entites/Redeem";
 
 interface IRedeemsRepository {
   findByNumbers(numbers: string[]): Promise<Redeem[]>
-  bulkCreate(data: IGenerateReedemDTO[]): Promise<void>;
+  bulkCreate(data: IGenerateRedeemDTO[]): Promise<void>;
 }
 
 export { IRedeemsRepository }
