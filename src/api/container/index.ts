@@ -11,6 +11,10 @@ import { OrdersRepository } from "../../data/repositories/OrdersRepository";
 import { PaymentsRepository } from "../../data/repositories/PaymentsRepository";
 import { IRedeemsRepository } from "../../domain/contexts/redeems/repositories/contracts/IRedeemsRepository";
 import { RedeemsRepository } from "../../data/repositories/RedeemsRepository";
+import { INumbersProvider } from "../../domain/contexts/redeems/providers/random/INumbersProvider";
+import { NumbersProvider } from "../../domain/contexts/redeems/providers/random/NumbersProvider";
+import { ICartsRepository } from "../../domain/contexts/orders/repositories/contracts/ICartsRepository";
+import { CartsRepository } from "../../data/repositories/CartsRepository";
 
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
@@ -42,4 +46,14 @@ container.registerSingleton<IPaymentsRepository>(
 container.registerSingleton<IRedeemsRepository>(
   "RedeemsRepository",
   RedeemsRepository
+);
+
+container.registerSingleton<INumbersProvider>(
+  "NumbersProvider",
+  NumbersProvider
+);
+
+container.registerSingleton<ICartsRepository>(
+  "CartsRepository",
+  CartsRepository
 );
