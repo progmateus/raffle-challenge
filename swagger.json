@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Raffle Challenge",
+    "description": "This is api Raffle Challenge",
+    "version": "1.0.0",
+    "contact": {
+      "email": "contact@email.com"
+    }
+  },
+  "paths": {
+    "/orders": {
+      "post": {
+        "summary": "Create a Order",
+        "description": "Route to Create a Order",
+        "tags": [
+          "Orders"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "ERR_BAD_REQUEST"
+          },
+          "500": {
+            "description": "ERR_INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Create a User",
+        "description": "Route to Create a User",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "ERR_BAD_REQUEST"
+          },
+          "409": {
+            "description": "ERR_USER_ALREADY_EXISTS"
+          },
+          "500": {
+            "description": "ERR_INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Authenticate",
+        "description": "Route to Create a Authenticate",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "ERR_BAD_REQUEST"
+          },
+          "401": {
+            "description": "ERR_INVALID_CREDENTIALS"
+          },
+          "500": {
+            "description": "ERR_INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "post": {
+        "summary": "Refresh token",
+        "description": "Route to refresh a token",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucess"
+          },
+          "400": {
+            "description": "ERR_BAD_REQUEST"
+          },
+          "500": {
+            "description": "ERR_INTERNAL_SERVER_ERROR"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+          "qtdNumbers": {
+            "type": "number"
+          },
+          "payment": {
+            "type": "object",
+            "properties": {
+              "payment_method": {
+                "type": "string"
+              },
+              "credit_card": {
+                "type": "object",
+                "properties": {
+                  "recurrence": {
+                    "type": "boolean"
+                  },
+                  "installments": {
+                    "type": "number"
+                  },
+                  "statement_descriptor": {
+                    "type": "string"
+                  },
+                  "card": {
+                    "type": "object",
+                    "properties": {
+                      "number": {
+                        "type": "string"
+                      },
+                      "holder_name": {
+                        "type": "string"
+                      },
+                      "exp_month": {
+                        "type": "number"
+                      },
+                      "exp_year": {
+                        "type": "number"
+                      },
+                      "cvv": {
+                        "type": "string"
+                      },
+                      "billing_address": {
+                        "type": "object",
+                        "properties": {
+                          "line_1": {
+                            "type": "string"
+                          },
+                          "zip_code": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "SignInRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshTokenRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

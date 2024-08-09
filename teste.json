@@ -1,0 +1,72 @@
+{
+  "OrderRequest": {
+    "type": "object",
+    "properties": {
+      "qtdNumbers": {
+        "type": "number"
+      },
+      "payment": {
+        "type": "object",
+        "properties": {
+          "payment_method": {
+            "type": "string"
+          },
+          "credit_card": {
+            "type": "object",
+            "properties": {
+              "recurrence": {
+                "type": "boolean"
+              },
+              "installments": {
+                "type": "number"
+              },
+              "statement_descriptor": {
+                "type": "string"
+              },
+              "card": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "string"
+                  },
+                  "holder_name": {
+                    "type": "string"
+                  },
+                  "exp_month": {
+                    "type": "number"
+                  },
+                  "exp_year": {
+                    "type": "number"
+                  },
+                  "cvv": {
+                    "type": "string"
+                  },
+                  "billing_address": {
+                    "type": "object",
+                    "properties": {
+                      "line_1": {
+                        "type": "string"
+                      },
+                      "zip_code": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
