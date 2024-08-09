@@ -9,6 +9,7 @@ class CreateOrderController {
     const { payment, qtdNumbers } = request.body as ICreateOrderDTO;
     const { id } = request.user;
     const createOrderUseCase = container.resolve(CreateOrderUseCase)
+    console.log("PAYMENT: ", payment)
     await createOrderUseCase.execute({ payment, qtdNumbers, userId: id });
     return response.status(201).json({ message: "CREATED" })
   }
