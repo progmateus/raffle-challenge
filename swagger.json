@@ -143,7 +143,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SignInRequest"
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
