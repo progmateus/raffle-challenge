@@ -19,13 +19,7 @@ cd raffle-challenge
 ### Instalar depêncencias
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
 ### Rodar o container do banco de dados
