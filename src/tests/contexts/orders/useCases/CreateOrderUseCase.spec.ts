@@ -1,12 +1,12 @@
 import { CreateOrderUseCase } from "../../../../domain/contexts/orders/useCases/CreateOrderUseCase";
 import { NumbersProvider } from "../../../../domain/contexts/redeems/providers/random/NumbersProvider";
-import { RedeemsrepositoryInMemory } from "../../redeems/repositories/RedeemsrepositoryInMemody";
 import { CartsRepositoryInMemory } from "../repositories/CartsRepositoryInMemory";
 import { OrdersRepositoryInMemory } from "../repositories/OrdersRepositoryInMemory";
 import { PaymentsRepositoryInMemory } from "../repositories/PaymentsRepositoryInMemory";
+import { RedeemsRepositoryInMemory } from "../../redeems/repositories/RedeemsRepositoryInMemory";
 
 let ordersRepositoryInMemory: OrdersRepositoryInMemory;
-let redeemsRepositoryInMemory: RedeemsrepositoryInMemory;
+let redeemsRepositoryInMemory: RedeemsRepositoryInMemory;
 let cartsRepositoryInMemory: CartsRepositoryInMemory;
 let paymentsRepositoryInMemory: PaymentsRepositoryInMemory;
 
@@ -17,7 +17,7 @@ describe("Create Order", () => {
 
   beforeEach(() => {
     ordersRepositoryInMemory = new OrdersRepositoryInMemory();
-    redeemsRepositoryInMemory = new RedeemsrepositoryInMemory()
+    redeemsRepositoryInMemory = new RedeemsRepositoryInMemory()
     numbersProvider = new NumbersProvider()
     cartsRepositoryInMemory = new CartsRepositoryInMemory()
     paymentsRepositoryInMemory = new PaymentsRepositoryInMemory()

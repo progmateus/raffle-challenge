@@ -10,18 +10,18 @@ class RedeemsRepositoryInMemory implements IRedeemsRepository {
   redeems: Redeem[] = [];
 
   async findByNumbers(numbers: string[]): Promise<Redeem[]> {
-    return this.redeems.filter(r => numbers.includes[r.number])
+    return this.redeems.filter(r => numbers.includes(r.number))
   }
   async bulkCreate(data: IGenerateRedeemDTO[]): Promise<void> {
-    data.forEach((r, index) => {
-      const redeem = {
-        id: index,
+    const newRedeems = data.map((r) => {
+      return {
         cartId: r.cartId,
         number: r.number,
         userId: r.userId
-      } as Redeem
-      this.redeems.push(redeem)
-    })
+      }
+    }) as Redeem[]
+
+    this.redeems.push(...newRedeems)
   }
 
 }
