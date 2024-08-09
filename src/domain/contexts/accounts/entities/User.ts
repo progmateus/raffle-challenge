@@ -2,6 +2,7 @@ import { AutoIncrement, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt }
 
 @Table
 class User extends Model {
+
   @PrimaryKey
   @AutoIncrement
   @Column

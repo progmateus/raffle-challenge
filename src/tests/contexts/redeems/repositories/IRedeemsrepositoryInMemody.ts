@@ -14,11 +14,10 @@ class RedeemsrepositoryInMemory implements IRedeemsRepository {
   }
   async bulkCreate(data: IGenerateReedemDTO[]): Promise<void> {
     data.map((r) => {
-      const redeem = new Redeem();
-      Object.assign(redeem, {
+      const redeem = {
         number: r.number,
         userId: r.userId,
-      })
+      } as Redeem
       this.redeems.push(redeem)
     })
 

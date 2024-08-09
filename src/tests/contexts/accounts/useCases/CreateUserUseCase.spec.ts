@@ -59,6 +59,6 @@ describe("Create User", () => {
       thrownError = error;
     }
 
-    expect(thrownError).rejects.toBeInstanceOf(AppError)
+    expect(thrownError).toBeInstanceOf(AppError)
   })
 })
