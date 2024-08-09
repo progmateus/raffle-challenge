@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { AppError } from "../../shared/errors/AppError";
+import { auth } from "../../shared/config/auth";
 
 interface IPayload {
   subject: number
@@ -13,6 +14,7 @@ export async function ensureAuthenticated(
 ) {
 
   const authHeader = request.headers.authorization;
+  const { secret_token } = auth
 
   if (!authHeader) {
     throw new AppError("ERR_TOKEN_MISSING");
@@ -27,7 +29,7 @@ export async function ensureAuthenticated(
   try {
     const { subject: user_id } = verify(
       token,
-      process.env.SECRET_TOKEN
+      secret_token
     ) as IPayload
 
 
@@ -36,7 +38,8 @@ export async function ensureAuthenticated(
     };
 
     next();
-  } catch {
+  } catch (err) {
+    console.log(err)
     throw new AppError("ERR_INVALID_TOKEN", 401);
   }
 }
