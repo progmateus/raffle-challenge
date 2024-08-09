@@ -12,15 +12,45 @@
     "/orders": {
       "post": {
         "summary": "Create a Order",
-        "description": "Route to Create a Order",
+        "description": "Only users can create a order",
         "tags": [
           "Orders"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OrderRequest"
+              },
+              "example": {
+                "qtdNumbers": 4,
+                "payment": {
+                  "payment_method": "credit_card",
+                  "credit_card": {
+                    "recurrence": false,
+                    "installments": 1,
+                    "statement_descriptor": "AVENGERS",
+                    "card": {
+                      "number": "4000000000000010",
+                      "holder_name": "Tony Stark",
+                      "exp_month": 1,
+                      "exp_year": 30,
+                      "cvv": "3531",
+                      "billing_address": {
+                        "line_1": "10880, Malibu Point, Malibu Central",
+                        "zip_code": "90265",
+                        "city": "Malibu",
+                        "state": "CA",
+                        "country": "US"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -236,6 +266,13 @@
             "type": "string"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
