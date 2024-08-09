@@ -1,12 +1,9 @@
 
 import { inject, injectable } from "tsyringe";
-import { sign, verify } from "jsonwebtoken"
-import dayjs from "dayjs";
-import { AppError } from "../../../../../shared/errors/AppError";
-import { auth } from "../../../../../data/config/auth";
 import { IRedeemsRepository } from "../../repositories/contracts/IRedeemsRepository";
 import { ICreateRedeemDTO } from "../../dtos/ICreateReedemDTO";
 import { INumbersProvider } from "../../providers/random/INumbersProvider";
+import { Redeem } from "../../entites/Redeem";
 
 @injectable()
 class CreateRedeemUseCase {
@@ -18,7 +15,7 @@ class CreateRedeemUseCase {
     private numbersProvider: INumbersProvider
   ) { }
 
-  async execute({ userId, qtdNumbers }: ICreateRedeemDTO) {
+  async execute({ userId, qtdNumbers }: ICreateRedeemDTO): Promise<Redeem[]> {
     let generatedNumbers = this.numbersProvider.generateRandomNumbers(qtdNumbers);
 
     const numbersAlreadyExistents = await this.redeemsRepository.findByNumbers(generatedNumbers)
@@ -46,6 +43,7 @@ class CreateRedeemUseCase {
         }
       })
     )
+    return this.redeemsRepository.findByNumbers(generatedNumbers)
   }
 }
 export { CreateRedeemUseCase }
