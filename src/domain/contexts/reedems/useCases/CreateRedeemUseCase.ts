@@ -1,9 +1,12 @@
 
-import { inject, injectable } from "tsyringe";
+import { container, inject, injectable } from "tsyringe";
 import { IRedeemsRepository } from "../repositories/contracts/IRedeemsRepository";
 import { ICreateRedeemDTO } from "../dtos/ICreateReedemDTO";
 import { INumbersProvider } from "../providers/random/INumbersProvider";
 import { Redeem } from "../entites/Redeem";
+import { ICartsRepository } from "../../orders/repositories/contracts/ICartsRepository";
+import { IOrdersRepository } from "../../orders/repositories/contracts/IOrdersRepository";
+import { CreatePaymentUsecase } from "../../payments/useCases/createPayment/CreatePaymentUsecase";
 
 @injectable()
 class CreateRedeemUseCase {
@@ -12,10 +15,14 @@ class CreateRedeemUseCase {
     @inject("RedeemsRepository")
     private redeemsRepository: IRedeemsRepository,
     @inject("NumbersProvider")
-    private numbersProvider: INumbersProvider
+    private numbersProvider: INumbersProvider,
+    @inject("CartsRepository")
+    private cartsRepository: ICartsRepository,
+    @inject("PaymentsRepository")
+    private ordersRepository: IOrdersRepository,
   ) { }
 
-  async execute({ userId, qtdNumbers }: ICreateRedeemDTO): Promise<Redeem[]> {
+  async execute({ userId, qtdNumbers, payment }: ICreateRedeemDTO): Promise<Redeem[]> {
     let generatedNumbers = this.numbersProvider.generateRandomNumbers(qtdNumbers);
 
     const numbersAlreadyExistents = await this.redeemsRepository.findByNumbers(generatedNumbers)
@@ -35,11 +42,26 @@ class CreateRedeemUseCase {
       generatedNumbers = nonExistentNumbers
     }
 
+    const { id: cartId } = await this.cartsRepository.create();
+
+    const order = await this.ordersRepository.create({
+      qtdNumbers,
+      cartId,
+      price: qtdNumbers * 0.25
+    })
+
+    const { credit_card, payment_method } = payment
+
+    const createPaymentUseCase = container.resolve(CreatePaymentUsecase)
+
+    await createPaymentUseCase.execute({ payment_method, credit_card, orderId: order.id })
+
     await this.redeemsRepository.bulkCreate(
       generatedNumbers.map((n) => {
         return {
           userId,
-          number: n
+          number: n,
+          cartId
         }
       })
     )

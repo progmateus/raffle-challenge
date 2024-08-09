@@ -1,4 +1,4 @@
-import { AutoIncrement, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AutoIncrement, BelongsTo, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 
 @Table
 class Payment extends Model {
@@ -49,6 +49,9 @@ class Payment extends Model {
 
   @Column
   country: string;
+
+  @BelongsTo(() => Payment)
+  payment: Payment;
 
   @CreatedAt
   createdAt: Date;

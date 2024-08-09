@@ -1,6 +1,6 @@
 interface ICreateOrderDTO {
   qtdNumbers: number,
-  userId: number,
+  cartId: number,
   price?: number
 }
 export { ICreateOrderDTO }

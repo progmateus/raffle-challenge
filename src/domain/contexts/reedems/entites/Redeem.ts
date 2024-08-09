@@ -1,5 +1,6 @@
 import { AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 import { User } from "../../accounts/entities/User";
+import { Cart } from "../../orders/entities/Cart";
 
 @Table
 class Redeem extends Model {
@@ -14,6 +15,13 @@ class Redeem extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @ForeignKey(() => Cart)
+  @Column
+  cartId: number;
+
+  @BelongsTo(() => Cart)
+  cart: User;
 
   @Column
   number: string;
