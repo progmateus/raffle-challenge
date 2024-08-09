@@ -3,6 +3,12 @@ import { IUsersTokensRepository } from "../../domain/contexts/auth/repositories/
 import { UsersTokensRepository } from "../../data/repositories/UsersTokensRepository";
 import { IUsersRepository } from "../../domain/contexts/accounts/repositories/contracts/IUsersRepository";
 import { UsersRepository } from "../../data/repositories/UserRepository";
+import { IBcryptHasherProvider } from "../../domain/contexts/accounts/providers/criptography/IBcryptHasherProvider";
+import { BcryptHasherProvider } from "../../domain/contexts/accounts/providers/criptography/BcryptHasherProvider";
+import { IOrdersRepository } from "../../domain/contexts/orders/repositories/contracts/IOrdersRepository";
+import { IPaymentsRepository } from "../../domain/contexts/payments/repositories/contracts/IPaymentsRepository";
+import { OrdersRepository } from "../../data/repositories/OrdersRepository";
+import { PaymentsRepository } from "../../data/repositories/PaymentsRepository";
 
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
@@ -12,4 +18,21 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
   UsersRepository
+);
+
+container.registerSingleton<IBcryptHasherProvider>(
+  "BcryptHasherProvider",
+  BcryptHasherProvider
+);
+
+
+container.registerSingleton<IOrdersRepository>(
+  "OrdersRepository",
+  OrdersRepository
+);
+
+
+container.registerSingleton<IPaymentsRepository>(
+  "PaymentsRepository",
+  PaymentsRepository
 );

@@ -5,7 +5,7 @@ class CartsRepositoryInMemory implements ICartsRepository {
   carts: Cart[] = [];
 
 
-  async create(userId: number, price: number): Promise<Cart> {
+  async create(userId: number): Promise<Cart> {
     const cart = {
       id: 1,
       userId

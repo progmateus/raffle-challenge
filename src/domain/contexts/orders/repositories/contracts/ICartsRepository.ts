@@ -3,6 +3,6 @@ import { Cart } from "../../entities/Cart"
 import { Order } from "../../entities/Order"
 
 interface ICartsRepository {
-  create(userId: number, price: number): Promise<Cart>
+  create(userId: number): Promise<Cart>
 }
 export { ICartsRepository }

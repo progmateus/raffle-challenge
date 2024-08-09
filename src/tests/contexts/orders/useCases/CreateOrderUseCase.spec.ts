@@ -37,7 +37,7 @@ describe("Create Order", () => {
     const userId = 1
     const price = qtdNumbers * 0.25
 
-    const cart = await cartsRepositoryInMemory.create(userId, price)
+    const cart = await cartsRepositoryInMemory.create(userId)
     const order = await ordersRepositoryInMemory.create({ cartId: cart.id, price })
 
     const redeemCreated = await createOrderUseCase.execute({

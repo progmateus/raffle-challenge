@@ -46,7 +46,7 @@ class CreateOrderUseCase {
     }
     const price = qtdNumbers * 0.25;
 
-    const { id: cartId } = await this.cartsRepository.create(userId, price);
+    const { id: cartId } = await this.cartsRepository.create(userId);
 
     const order = await this.ordersRepository.create({
       qtdNumbers,
