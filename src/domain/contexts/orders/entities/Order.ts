@@ -15,7 +15,6 @@ class Order extends Model {
   paymentId?: number;
 
   @BelongsTo(() => Payment)
-  @AllowNull
   payment?: Payment;
 
   @ForeignKey(() => Cart)
