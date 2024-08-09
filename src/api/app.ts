@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors"
 import cors from "cors"
 import "../data/index"
+import { router } from "./routes";
 import { AppError } from "../shared/errors/AppError";
 import { ZodError } from "zod";
 
@@ -9,6 +10,8 @@ const app = express();
 
 app.use(express.json())
 
+app.use(cors())
+app.use(router)
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     console.log(err)
