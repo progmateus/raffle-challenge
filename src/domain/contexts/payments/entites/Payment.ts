@@ -28,15 +28,6 @@ class Payment extends Model {
   cardHolderName: string;
 
   @Column
-  cardExpMonth: number;
-
-  @Column
-  cardExpYear: number;
-
-  @Column
-  cardCvv: string;
-
-  @Column
   line1: string;
 
   @Column

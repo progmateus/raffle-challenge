@@ -7,23 +7,6 @@ import { IPaymentsRepository } from "../../../../domain/contexts/payments/reposi
 class PaymentsRepositoryInMemory implements IPaymentsRepository {
   payments: Payment[] = [];
 
-  id: number;
-  method: string;
-  recurrence: boolean;
-  installments: number;
-  statementDescriptor: string;
-  cardFinalNumbers: string;
-  cardHolderName: string;
-  cardExpMonth: number;
-  cardExpYear: number;
-  cardCvv: string;
-  line1: string;
-  zipCode: string;
-  city: string;
-  state: string;
-  country: string;
-
-
   async create({
     payment_method,
     credit_card: {
@@ -35,9 +18,6 @@ class PaymentsRepositoryInMemory implements IPaymentsRepository {
           state,
           zip_code
         },
-        cvv,
-        exp_month,
-        exp_year,
         holder_name,
         number
       },
@@ -53,11 +33,8 @@ class PaymentsRepositoryInMemory implements IPaymentsRepository {
       recurrence,
       installments,
       statementDescriptor: statement_descriptor,
-      cardFinalNumbers: number,
+      cardFinalNumbers: number.substring(number.length - 5, number.length + 1),
       cardHolderName: holder_name,
-      cardExpMonth: exp_month,
-      cardExpYear: exp_year,
-      cardCvv: cvv,
       line1: line_1,
       zipCode: zip_code,
       city,
