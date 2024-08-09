@@ -1,4 +1,4 @@
-import { AllowNull, AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, BelongsTo, Column, CreatedAt, Default, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 import { Payment } from "../../payments/entites/Payment";
 import { Cart } from "./Cart";
 
@@ -28,6 +28,7 @@ class Order extends Model {
   @Column
   price: number;
 
+  @Default(false)
   @Column
   isPayed: boolean;
 

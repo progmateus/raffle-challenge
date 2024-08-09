@@ -7,11 +7,5 @@ module.exports = {
   repositoryMode: true,
   define: {
     timestamps: true
-  },
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
   }
 }
