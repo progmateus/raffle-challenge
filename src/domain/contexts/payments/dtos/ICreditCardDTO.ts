@@ -7,7 +7,7 @@ interface ICardDTO {
   billing_address: {
     line_1: string,
     zip_code: string,
-    cit: string,
+    city: string,
     state: string,
     country: string
   }

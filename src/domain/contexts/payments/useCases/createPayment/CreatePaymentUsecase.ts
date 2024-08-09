@@ -3,8 +3,6 @@ import { ICreatePaymentDTO } from "../../dtos/ICreatePaymentDTO";
 import { Payment } from "../../entites/Payment";
 import { IPaymentsRepository } from "../../repositories/contracts/IPaymentsRepository";
 import { z } from "zod";
-import { ICartsRepository } from "../../../orders/repositories/contracts/ICartsRepository";
-import { IOrdersRepository } from "../../../orders/repositories/contracts/IOrdersRepository";
 
 const paymentSchema = z.object({
   payment_method: z.string(),
@@ -17,11 +15,11 @@ const paymentSchema = z.object({
       holder_name: z.string(),
       exp_month: z.number().positive(),
       exp_year: z.number().positive(),
-      cvv: z.string().length(3),
+      cvv: z.string().length(4),
       billing_address: z.object({
         line_1: z.string(),
         zip_code: z.string(),
-        cit: z.string(),
+        city: z.string(),
         state: z.string(),
         country: z.string()
       })
@@ -32,14 +30,14 @@ const paymentSchema = z.object({
 class CreatePaymentUsecase {
   constructor(
     @inject("PaymentsRepository")
-    private PaymentsRepository: IPaymentsRepository
+    private paymentsRepository: IPaymentsRepository
   ) { }
 
   async execute({ payment_method, credit_card, orderId }: ICreatePaymentDTO): Promise<Payment> {
 
     paymentSchema.parse({ payment_method, credit_card })
 
-    return await this.PaymentsRepository.create({
+    return await this.paymentsRepository.create({
       credit_card,
       payment_method,
       orderId

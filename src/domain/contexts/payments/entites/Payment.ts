@@ -1,4 +1,5 @@
 import { AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { Order } from "../../orders/entities/Order";
 
 @Table
 class Payment extends Model {
@@ -50,12 +51,12 @@ class Payment extends Model {
   @Column
   country: string;
 
-  @ForeignKey(() => Payment)
+  @ForeignKey(() => Order)
   @Column
-  paymentId: number;
+  orderId: number;
 
-  @BelongsTo(() => Payment)
-  payment: Payment;
+  @BelongsTo(() => Order)
+  order: Order;
 
   @CreatedAt
   createdAt: Date;

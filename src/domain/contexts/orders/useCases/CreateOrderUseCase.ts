@@ -7,6 +7,7 @@ import { ICreateOrderDTO } from "../dtos/ICreateOrderDTO";
 import { IRedeemsRepository } from "../../redeems/repositories/contracts/IRedeemsRepository";
 import { INumbersProvider } from "../../redeems/providers/random/INumbersProvider";
 import { Redeem } from "../../redeems/entites/Redeem";
+import { IPaymentsRepository } from "../../payments/repositories/contracts/IPaymentsRepository";
 
 @injectable()
 class CreateOrderUseCase {
@@ -19,6 +20,8 @@ class CreateOrderUseCase {
     @inject("CartsRepository")
     private cartsRepository: ICartsRepository,
     @inject("PaymentsRepository")
+    private paymentsRepository: IPaymentsRepository,
+    @inject("OrdersRepository")
     private ordersRepository: IOrdersRepository,
   ) { }
 
@@ -54,7 +57,7 @@ class CreateOrderUseCase {
 
     const { credit_card, payment_method } = payment
 
-    const createPaymentUseCase = container.resolve(CreatePaymentUsecase)
+    const createPaymentUseCase = new CreatePaymentUsecase(this.paymentsRepository);
 
     await createPaymentUseCase.execute({ payment_method, credit_card, orderId: order.id })
 
