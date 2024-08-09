@@ -5,7 +5,7 @@ const { DataTypes } = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Carts', {
+    return queryInterface.createTable('Redeems', {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -16,7 +16,19 @@ module.exports = {
         type: DataTypes.INTEGER,
         references: { model: "Users", key: "id" },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
+        allowNull: false
+      },
+      cartId: {
+        type: DataTypes.INTEGER,
+        references: { model: "Carts", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: false
+      },
+      number: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -30,6 +42,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Carts')
+    return queryInterface.dropTable('Redeems')
   }
 };
