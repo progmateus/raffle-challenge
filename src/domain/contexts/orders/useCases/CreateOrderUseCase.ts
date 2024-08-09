@@ -8,7 +8,12 @@ import { IRedeemsRepository } from "../../redeems/repositories/contracts/IRedeem
 import { INumbersProvider } from "../../redeems/providers/random/INumbersProvider";
 import { Redeem } from "../../redeems/entites/Redeem";
 import { IPaymentsRepository } from "../../payments/repositories/contracts/IPaymentsRepository";
+import { z } from "zod";
 
+
+const orderSchema = z.object({
+  qtdNumbers: z.number().positive()
+});
 @injectable()
 class CreateOrderUseCase {
 
@@ -26,6 +31,9 @@ class CreateOrderUseCase {
   ) { }
 
   async execute({ payment, qtdNumbers, userId }: Omit<ICreateOrderDTO, "cartId" | "price">): Promise<Redeem[]> {
+
+    orderSchema.parse({ qtdNumbers })
+
     let generatedNumbers = this.numbersProvider.generateRandomNumbers(qtdNumbers);
 
     const numbersAlreadyExistents = await this.redeemsRepository.findByNumbers(generatedNumbers)
