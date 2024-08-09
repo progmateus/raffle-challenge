@@ -19,6 +19,13 @@ module.exports = {
         onDelete: "CASCADE",
         allowNull: true
       },
+      cartId: {
+        type: DataTypes.INTEGER,
+        references: { model: "Carts", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        allowNull: true
+      },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false
