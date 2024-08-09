@@ -1,5 +1,5 @@
 import { NumbersProvider } from "../../../../domain/contexts/reedems/providers/random/NumbersProvider";
-import { CreateRedeemUseCase } from "../../../../domain/contexts/reedems/useCases/createRedeem/CreateRedeemUseCase";
+import { CreateRedeemUseCase } from "../../../../domain/contexts/reedems/useCases/CreateRedeemUseCase";
 import { RedeemsrepositoryInMemory } from "../repositories/IRedeemsrepositoryInMemody";
 
 let redeemsRepositoryInMemory: RedeemsrepositoryInMemory;

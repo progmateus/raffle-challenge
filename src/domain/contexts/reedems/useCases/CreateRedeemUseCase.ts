@@ -1,9 +1,9 @@
 
 import { inject, injectable } from "tsyringe";
-import { IRedeemsRepository } from "../../repositories/contracts/IRedeemsRepository";
-import { ICreateRedeemDTO } from "../../dtos/ICreateReedemDTO";
-import { INumbersProvider } from "../../providers/random/INumbersProvider";
-import { Redeem } from "../../entites/Redeem";
+import { IRedeemsRepository } from "../repositories/contracts/IRedeemsRepository";
+import { ICreateRedeemDTO } from "../dtos/ICreateReedemDTO";
+import { INumbersProvider } from "../providers/random/INumbersProvider";
+import { Redeem } from "../entites/Redeem";
 
 @injectable()
 class CreateRedeemUseCase {
