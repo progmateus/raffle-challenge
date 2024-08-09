@@ -5,13 +5,15 @@ import { IUsersRepository } from "../../../../domain/contexts/accounts/repositor
 class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
-  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+  async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = new User();
     Object.assign(user, {
       name,
       email,
       password
     })
+    this.users.push(user)
+    return user;
   }
   async findById(id: number): Promise<User> {
     return this.users.find((u) => u.id === id)

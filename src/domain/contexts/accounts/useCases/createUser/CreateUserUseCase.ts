@@ -3,6 +3,7 @@ import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../repositories/contracts/IUsersRepository";
 import { AppError } from "../../../../../shared/errors/AppError";
 import { IBcryptHasherProvider } from "../../providers/criptography/IBcryptHasherProvider";
+import { User } from "../../entities/User";
 
 @injectable()
 class CreateUserUseCase {
@@ -14,7 +15,7 @@ class CreateUserUseCase {
     private bcryptHasherProvider: IBcryptHasherProvider
   ) { }
 
-  async execute({ name, email, password }: ICreateUserDTO) {
+  async execute({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user = await this.usersRepository.findByEmail(email)
 
     if (user) {
@@ -22,7 +23,7 @@ class CreateUserUseCase {
     }
 
     const passwordHash = await this.bcryptHasherProvider.hash(password)
-    await this.usersRepository.create({
+    return await this.usersRepository.create({
       name,
       email,
       password: passwordHash
