@@ -3,7 +3,7 @@ import { IUsersRepository } from "../../domain/contexts/accounts/repositories/co
 import { ICreateUserDTO } from "../../domain/contexts/accounts/dtos/ICreateUserDTO";
 import { User } from "../../domain/contexts/accounts/entities/User";
 import { Repository } from "sequelize-typescript";
-import sequelize from "../../data";
+import sequelize from "..";
 
 @injectable()
 class UsersRepository implements IUsersRepository {

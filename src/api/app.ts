@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors"
 import cors from "cors"
 import "../data/index"
+import "./container/index"
 import { router } from "./routes";
 import { AppError } from "../shared/errors/AppError";
 import { ZodError } from "zod";
