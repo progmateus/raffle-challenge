@@ -2,7 +2,7 @@ import { AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, Primary
 import { User } from "../../accounts/entities/User";
 
 @Table
-class Number extends Model {
+class Redeem extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -24,4 +24,4 @@ class Number extends Model {
   @UpdatedAt
   updatedAt: Date;
 }
-export { Number }
+export { Redeem }
