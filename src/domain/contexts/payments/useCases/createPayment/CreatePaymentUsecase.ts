@@ -3,6 +3,7 @@ import { ICreatePaymentDTO } from "../../dtos/ICreatePaymentDTO";
 import { Payment } from "../../entites/Payment";
 import { IPaymentsRepository } from "../../repositories/contracts/IPaymentsRepository";
 import { z } from "zod";
+import { IOrdersRepository } from "../../../orders/repositories/contracts/IOrdersRepository";
 
 const paymentSchema = z.object({
   payment_method: z.string(),
@@ -30,18 +31,24 @@ const paymentSchema = z.object({
 class CreatePaymentUsecase {
   constructor(
     @inject("PaymentsRepository")
-    private paymentsRepository: IPaymentsRepository
+    private paymentsRepository: IPaymentsRepository,
+    @inject("OrdersRepository")
+    private ordersRepository: IOrdersRepository
   ) { }
 
   async execute({ payment_method, credit_card, orderId }: ICreatePaymentDTO): Promise<Payment> {
 
     paymentSchema.parse({ payment_method, credit_card })
 
-    return await this.paymentsRepository.create({
+    const payment = await this.paymentsRepository.create({
       credit_card,
       payment_method,
       orderId
     })
+
+    this.ordersRepository.informPayment(orderId, payment.id)
+
+    return payment
   }
 }
 export { CreatePaymentUsecase }

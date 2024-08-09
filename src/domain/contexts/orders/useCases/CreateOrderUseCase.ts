@@ -87,7 +87,7 @@ class CreateOrderUseCase {
 
     const { credit_card, payment_method } = payment
 
-    const createPaymentUseCase = new CreatePaymentUsecase(this.paymentsRepository);
+    const createPaymentUseCase = new CreatePaymentUsecase(this.paymentsRepository, this.ordersRepository);
 
     await createPaymentUseCase.execute({ payment_method, credit_card, orderId: order.id })
 
