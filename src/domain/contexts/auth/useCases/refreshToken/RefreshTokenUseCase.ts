@@ -3,7 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { sign, verify } from "jsonwebtoken"
 import dayjs from "dayjs";
 import { AppError } from "../../../../../shared/errors/AppError";
-import { auth } from "../../../../../data/config/auth";
+import { auth } from "../../../../../shared/config/auth";
 import { IUsersTokensRepository } from "../../repositories/contracts/IUsersTokensRepository";
 
 interface IPayload {
