@@ -5,9 +5,10 @@ import { CreateOrderUseCase } from "../../domain/contexts/orders/useCases/Create
 
 class CreateOrderController {
   async handle(request: Request, response: Response) {
-    const { payment, qtdNumbers, userId } = request.body;
+    const { payment, qtdNumbers } = request.body;
+    const { id } = request.user;
     const createOrderUseCase = container.resolve(CreateOrderUseCase)
-    await createOrderUseCase.execute({ payment, qtdNumbers, userId });
+    await createOrderUseCase.execute({ payment, qtdNumbers, userId: id });
     return response.status(201).json({ message: "CREATED" })
   }
 }
