@@ -30,6 +30,7 @@
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
     "sequelize-typescript": "^2.1.6",
-    "tsyringe": "^4.8.0"
+    "tsyringe": "^4.8.0",
+    "zod": "^3.23.8"
   }
 }
